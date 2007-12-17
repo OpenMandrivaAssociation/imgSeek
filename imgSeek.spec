@@ -10,7 +10,6 @@ Source0: 	%{name}-%{version}.tar.bz2
 Patch0:     imgSeek-0.8.4-sizetype.patch 
 License: 	GPL
 Group:		Graphics
-BuildRoot: 	%{_tmppath}/%{name}-buildroot
 Requires: 	PyQt >= 3.4
 Requires: 	python-imaging
 Requires: 	libjpeg-progs
