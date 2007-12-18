@@ -1,23 +1,22 @@
 %define name imgSeek
-%define version 0.8.4
-%define release %mkrel 2
+%define version 0.8.6
+%define release %mkrel 1
 
-Summary: Photo collection manager and viewer with content-based query
 Name: 		%{name}
 Version: 	%{version}
 Release: 	%{release}
-Source0: 	%{name}-%{version}.tar.bz2
-Patch0:     imgSeek-0.8.4-sizetype.patch 
+Summary: Photo collection manager and viewer with content-based query
 License: 	GPL
 Group:		Graphics
-Requires: 	PyQt >= 3.4
+Url: 		http://imgseek.sourceforge.net/
+Source0: 	http://downloads.sourceforge.net/imgseek/%{name}-%{version}.tar.bz2
+Patch0:     imgSeek-0.8.4-sizetype.patch 
+Requires: 	python-qt >= 3.4
 Requires: 	python-imaging
 Requires: 	libjpeg-progs
-BuildRequires:	PyQt
+BuildRequires:	python-qt
 BuildRequires:	python-devel
-BuildRequires:	ImageMagick
 BuildRequires:	qt3-devel
-Url: 		http://imgseek.sourceforge.net/
 
 %description
 imgSeek is a photo collection manager and viewer with content-based search 
@@ -27,23 +26,18 @@ collection).
 
 %prep
 %setup -q
-%patch -p0
-%build
+#%patch -p0
+rm -rf distutils
 
+%build
 env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-python setup.py install --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
-
-#icons
-install -d -m755 %{buildroot}/{%{_miconsdir},%{_liconsdir}}
-install -m644 %{name}.png %{buildroot}/%{_iconsdir}/
-install -m644 %{name}.png %{buildroot}/%{_liconsdir}/
-convert -resize 16x16 %{name}.png %{buildroot}/%{_miconsdir}/%{name}.png
+rm -rf %{buildroot}
+python setup.py install --root=%{buildroot}
 
 #menu
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
+mkdir -p %{buildroot}%{_datadir}/applications/
 cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
 [Desktop Entry]
 Type=Application
@@ -61,13 +55,14 @@ EOF
 %clean_menus
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-%files -f INSTALLED_FILES
+%files
 %defattr(-,root,root)
 %{_datadir}/applications/mandriva-%{name}.desktop
-%{_iconsdir}/%{name}.png
-%{_miconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
 %doc ChangeLog README THANKS AUTHORS
+%{_bindir}*
+%{_datadir}/%{name}
+%{py_platsitedir}/imgSeekLib
+%{py_platsitedir}/imgSeek-*.egg-info
 
