@@ -43,15 +43,15 @@ install -m644 %{name}.png %{buildroot}/%{_liconsdir}/
 convert -resize 16x16 %{name}.png %{buildroot}/%{_miconsdir}/%{name}.png
 
 #menu
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat <<EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): \
-needs="x11" \
-section="Multimedia/Graphics" \
-title="ImgSeek" \
-longtitle="ImgSeek Photo Manager" \
-command="%{_bindir}/%{name}" needs="X11" \
-icon="%{name}.png"
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
+cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
+[Desktop Entry]
+Type=Application
+Categories=Graphics;Viewer;
+Name=ImgSeek
+Comment=ImgSeek Photo Manager
+Exec=%{_bindir}/%{name}
+Icon=%{name}
 EOF
 
 %post
@@ -65,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%{_menudir}/%{name}
+%{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
