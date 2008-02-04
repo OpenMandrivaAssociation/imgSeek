@@ -36,6 +36,14 @@ env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
 rm -rf %{buildroot}
 python setup.py install --root=%{buildroot}
 
+cd imgSeekLib/
+g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python2.5/ -c imgdb.cpp -o imgdb.o
+g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python2.5/ -c haar.cpp -o haar.o
+g++ -shared imgdb.o haar.o -L%qt3dir/%_lib -lqt-mt -o imgdb.so 
+
+%__cp imgdb.so %buildroot%{py_platsitedir}
+cd -
+
 #menu
 mkdir -p %{buildroot}%{_datadir}/applications/
 cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
@@ -65,4 +73,4 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}
 %{py_platsitedir}/imgSeekLib
 %{py_platsitedir}/imgSeek-*.egg-info
-
+%{py_platsitedir}/imgdb.so
