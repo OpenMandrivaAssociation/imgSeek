@@ -1,6 +1,6 @@
 %define name imgSeek
 %define version 0.8.6
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name: 		%{name}
 Version: 	%{version}
@@ -10,7 +10,8 @@ License: 	GPL
 Group:		Graphics
 Url: 		http://imgseek.sourceforge.net/
 Source0: 	http://downloads.sourceforge.net/imgseek/%{name}-%{version}.tar.bz2
-Patch0:     imgSeek-0.8.4-sizetype.patch 
+Patch1:     imgseek-0.8.6-ImageDB-name-change.patch
+Patch2:     imgseek-0.8.6-lib64.patch
 Requires: 	python-qt >= 3.4
 Requires: 	python-imaging
 Requires: 	libjpeg-progs
@@ -26,7 +27,8 @@ collection).
 
 %prep
 %setup -q
-#%patch -p0
+%patch1 -p1
+%patch2 -p1
 rm -rf distutils
 
 %build
