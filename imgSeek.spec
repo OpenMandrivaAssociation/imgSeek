@@ -8,6 +8,7 @@ Release: 	%{release}
 Summary: Photo collection manager and viewer with content-based query
 License: 	GPL
 Group:		Graphics
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Url: 		http://imgseek.sourceforge.net/
 Source0: 	http://downloads.sourceforge.net/imgseek/%{name}-%{version}.tar.bz2
 Patch1:     imgseek-0.8.6-ImageDB-name-change.patch
