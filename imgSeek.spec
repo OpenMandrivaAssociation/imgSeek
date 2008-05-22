@@ -1,6 +1,6 @@
 %define name imgSeek
 %define version 0.8.6
-%define release %mkrel 2
+%define release %mkrel 3
 
 Name: 		%{name}
 Version: 	%{version}
@@ -72,7 +72,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %{_datadir}/applications/mandriva-%{name}.desktop
 %doc ChangeLog README THANKS AUTHORS
-%{_bindir}*
+%{_bindir}/*
 %{_datadir}/%{name}
 %{py_platsitedir}/imgSeekLib
 %{py_platsitedir}/imgSeek-*.egg-info
