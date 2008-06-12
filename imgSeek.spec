@@ -59,11 +59,15 @@ Exec=%{_bindir}/%{name}
 Icon=%{name}
 EOF
 
+%if %mdkversion < 200900
 %post
 %update_menus
+%endif
 
+%if %mdkversion < 200900
 %postun
 %clean_menus
+%endif
 
 %clean
 rm -rf %{buildroot}
