@@ -1,6 +1,6 @@
 %define name imgSeek
 %define version 0.8.6
-%define release %mkrel 5
+%define release %mkrel 6
 
 Name: 		%{name}
 Version: 	%{version}
@@ -13,6 +13,7 @@ Url: 		http://imgseek.sourceforge.net/
 Source0: 	http://downloads.sourceforge.net/imgseek/%{name}-%{version}.tar.bz2
 Patch1:     imgseek-0.8.6-ImageDB-name-change.patch
 Patch2:     imgseek-0.8.6-lib64.patch
+Patch3:     imgSeek-0.8.6-fix-missing-header.patch
 Requires: 	python-qt >= 3.4
 Requires: 	python-imaging
 Requires: 	libjpeg-progs
@@ -30,9 +31,11 @@ collection).
 %setup -q
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 rm -rf distutils
 
 %build
+export QTDIR=%qt3dir
 env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
 
 %install
@@ -40,8 +43,8 @@ rm -rf %{buildroot}
 python setup.py install --root=%{buildroot}
 
 cd imgSeekLib/
-g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python2.5/ -c imgdb.cpp -o imgdb.o
-g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python2.5/ -c haar.cpp -o haar.o
+g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python%{pyver}/ -c imgdb.cpp -o imgdb.o
+g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python%{pyver}/ -c haar.cpp -o haar.o
 g++ -shared imgdb.o haar.o -L%qt3dir/%_lib -lqt-mt -o imgdb.so 
 
 %__cp imgdb.so %buildroot%{py_platsitedir}
