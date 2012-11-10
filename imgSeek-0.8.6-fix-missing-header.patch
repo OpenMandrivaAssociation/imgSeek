@@ -1,0 +1,11 @@
+diff -Naur imgSeek-0.8.6/imgSeekLib/haar.cpp imgSeek-0.8.6-fix-missing-header/imgSeekLib/haar.cpp
+--- imgSeek-0.8.6/imgSeekLib/haar.cpp	2006-01-25 02:56:18.000000000 +0100
++++ imgSeek-0.8.6-fix-missing-header/imgSeekLib/haar.cpp	2009-03-05 21:50:01.000000000 +0100
+@@ -49,6 +49,7 @@
+ #include <math.h> 
+ #include <stdio.h> 
+ #include <stdlib.h> 
++#include <cstring>
+ 
+ /* imgSeek Includes */
+ #include "haar.h"

@@ -1,0 +1,12 @@
+diff -Naur --exclude '*~' imgSeek-0.8.6/setup.py imgSeek-0.8.6-lib64/setup.py
+--- imgSeek-0.8.6/setup.py	2006-01-25 02:57:06.000000000 +0100
++++ imgSeek-0.8.6-lib64/setup.py	2008-02-04 21:03:51.000000000 +0100
+@@ -83,7 +83,7 @@
+ 
+ for qdir in qtdir:
+     include_dirs.append(qdir+"include")
+-    library_dirs.append(qdir+"lib")
++    library_dirs.append(qdir+sys.lib)
+ hasQT=0
+ 
+ for dir in include_dirs:
