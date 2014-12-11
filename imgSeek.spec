@@ -1,22 +1,17 @@
-%define name imgSeek
-%define version 0.8.6
-%define release %mkrel 6
-
-Name: 		%{name}
-Version: 	%{version}
-Release: 	%{release}
-Summary: Photo collection manager and viewer with content-based query
-License: 	GPL
+Name:		imgSeek
+Version:	0.8.6
+Release:	7
+Summary:	Photo collection manager and viewer with content-based query
+License:	GPL
 Group:		Graphics
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Url: 		http://imgseek.sourceforge.net/
-Source0: 	http://downloads.sourceforge.net/imgseek/%{name}-%{version}.tar.bz2
-Patch1:     imgseek-0.8.6-ImageDB-name-change.patch
-Patch2:     imgseek-0.8.6-lib64.patch
-Patch3:     imgSeek-0.8.6-fix-missing-header.patch
-Requires: 	python-qt >= 3.4
-Requires: 	python-imaging
-Requires: 	libjpeg-progs
+Url:		http://imgseek.sourceforge.net/
+Source0:	http://downloads.sourceforge.net/imgseek/%{name}-%{version}.tar.bz2
+Patch1:		imgseek-0.8.6-ImageDB-name-change.patch
+Patch2:		imgseek-0.8.6-lib64.patch
+Patch3:		imgSeek-0.8.6-fix-missing-header.patch
+Requires:	python-qt >= 3.4
+Requires:	python-imaging
+Requires:	libjpeg-progs
 BuildRequires:	python-qt
 BuildRequires:	python-devel
 BuildRequires:	qt3-devel
@@ -62,21 +57,8 @@ Exec=%{_bindir}/%{name}
 Icon=%{name}
 EOF
 
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %{_datadir}/applications/mandriva-%{name}.desktop
 %doc ChangeLog README THANKS AUTHORS
 %{_bindir}/*
