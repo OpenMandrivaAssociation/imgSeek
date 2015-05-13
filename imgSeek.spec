@@ -12,6 +12,7 @@ Patch3:		imgSeek-0.8.6-fix-missing-header.patch
 Requires:	python-qt3 >= 3.4
 Requires:	python-imaging
 Requires:	libjpeg-progs
+Provides:	imgseek
 BuildRequires:	python-qt3
 BuildRequires:	python-devel
 BuildRequires:	qt3-devel
