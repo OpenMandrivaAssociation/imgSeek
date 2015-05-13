@@ -1,6 +1,6 @@
 Name:		imgSeek
 Version:	0.8.6
-Release:	7
+Release:	8
 Summary:	Photo collection manager and viewer with content-based query
 License:	GPL
 Group:		Graphics
@@ -9,10 +9,10 @@ Source0:	http://downloads.sourceforge.net/imgseek/%{name}-%{version}.tar.bz2
 Patch1:		imgseek-0.8.6-ImageDB-name-change.patch
 Patch2:		imgseek-0.8.6-lib64.patch
 Patch3:		imgSeek-0.8.6-fix-missing-header.patch
-Requires:	python-qt >= 3.4
+Requires:	python-qt3 >= 3.4
 Requires:	python-imaging
 Requires:	libjpeg-progs
-BuildRequires:	python-qt
+BuildRequires:	python-qt3
 BuildRequires:	python-devel
 BuildRequires:	qt3-devel
 
@@ -38,8 +38,8 @@ rm -rf %{buildroot}
 python setup.py install --root=%{buildroot}
 
 cd imgSeekLib/
-g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python%{pyver}/ -c imgdb.cpp -o imgdb.o
-g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python%{pyver}/ -c haar.cpp -o haar.o
+g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python%{py_ver}/ -c imgdb.cpp -o imgdb.o
+g++ -DNDEBUG -fPIC -I%qt3dir/include -I%{_includedir}/python%{py_ver}/ -c haar.cpp -o haar.o
 g++ -shared imgdb.o haar.o -L%qt3dir/%_lib -lqt-mt -o imgdb.so 
 
 %__cp imgdb.so %buildroot%{py_platsitedir}
